@@ -30,7 +30,7 @@ void main()
         printf("\n두 개의 정수를 입력하시오>");
         scanf("%d %d", &num1, &num2);
         printf("연산자를 입력하시오 > (종료는 X)");
-        scanf(" %c", &op);
+        scanf(" %c", &op);        // 다시 보기!
 
         if (op == '+') {
             printf("%d", add(num1, num2));
