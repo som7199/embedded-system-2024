@@ -39,17 +39,17 @@ void rear_addNode(node *pnode, int _data)
   }
 }
 
+
 void showNode(node *pnode)
 {
   node *curr = pnode->next;
-  while (curr->next != NULL)
+  while (curr != NULL)
   {
     printf("%d\n", curr->data);
     curr = curr->next;
   }
-  // 노드가 하나밖에 없을 경우(첫번째 노드만 존재하는 경우)!
-  printf("%d\n", curr->data);
 }
+
 void main()
 {
   node* head = (node*)malloc(sizeof(node));
