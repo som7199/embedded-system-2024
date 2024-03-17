@@ -26,7 +26,7 @@ void pre_addNode(headNode* pnode, int _data)
 {
   node* newNode = (node*)malloc(sizeof(node));
   newNode->data = _data;
-  newNode->next = pnode->head;    // headNode 자체가(headNode 필드의 head가) >
+  newNode->next = pnode->head;    // headNode 자체가(headNode 필드의 head가) node를 가리키기 때문에 바로 노드 넣어줘도 됨 next 쓸 필요 없음!
   pnode->head = newNode;
 }
 
