@@ -1,0 +1,2 @@
+연결리스트 헤드 노드 구조체 만들고 코드 수정하기!
+createHeadNode(), pre_addNode(), showNode()까지 하고 조퇴함!
