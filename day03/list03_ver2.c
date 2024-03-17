@@ -30,23 +30,22 @@ void pre_addNode(headNode* pnode, int _data)
   pnode->head = newNode;
 }
 
-/*
 // 후위삽입 - 새 노드를 제일 뒤로!
-void rear_addNode(node *pnode, int _data)
+void rear_addNode(headNode *pnode, int _data)
 {
   node* newNode = (node*)malloc(sizeof(node));
   newNode->data = _data;
   newNode->next = NULL;
 
   // 아무런 노드도 생성되지 않은 경우
-  if(pnode->next == NULL)
+  if(pnode->head == NULL)
   {
-    pnode->next = newNode;
+    pnode->head = newNode;
   }
   // 이미 생성된 노드들이 있는 경우
   else
   {
-    node* curr = pnode->next;
+    node* curr = pnode->head;
     // 마지막 노드까지 순회하다가!
     while(curr->next != NULL){
       curr = curr->next;
@@ -55,7 +54,6 @@ void rear_addNode(node *pnode, int _data)
     curr->next = newNode;
   }
 }
-*/
 
 void showNode(headNode *pnode)
 {
@@ -67,22 +65,20 @@ void showNode(headNode *pnode)
   }
 }
 
-/*
-void allFreeNode(node* pnode)   // 전체 메모리 해제
+void allFreeNode(headNode* pnode)   // 전체 메모리 해제
 {
-  node *curr = pnode->next;
+  node *curr = pnode->head;
   int a = 0;
   while (curr != NULL)
   {
-    pnode->next = curr->next;
+    pnode->head = curr->next;
     free(curr);
     a++;
     printf("%d번째 노드 반환\n", a);
-    curr = pnode->next;
+    curr = pnode->head;
   }
   free(pnode);    // head도 잊지말고 메모리 해제
 }
-*/
 
 void main()
 {
@@ -94,12 +90,14 @@ void main()
   pre_addNode(h, 40);
   pre_addNode(h, 50);
 
-  /*
   rear_addNode(h, 60);
   rear_addNode(h, 70);
   rear_addNode(h, 80);
   rear_addNode(h, 90);
-  */
+
+  showNode(h);
+  allFreeNode(h);
+}
 
   showNode(h);
   //allFreeNode(h);
