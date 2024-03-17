@@ -98,7 +98,3 @@ void main()
   showNode(h);
   allFreeNode(h);
 }
-
-  showNode(h);
-  //allFreeNode(h);
-}
