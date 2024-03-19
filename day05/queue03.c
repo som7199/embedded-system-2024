@@ -29,12 +29,17 @@ void main()
 
   deQueue(lq);
   deQueue(lq);
+  deQueue(lq);
+  deQueue(lq);
   printQ(lq);
 }
 
 bool isEmpty(linkQ* plq)
 {
-  if(plq->rear == plq->front) return true;
+  // plq->front와 plq->rear,, 얘네가 포인터라는걸 잊고
+  // if(plq->front == plq->rear)로 조건을 걸었더니 Queue Underflow 처리가 안됨
+  // front == NULL이면 데이터가 다 빠져나갔다는 거니까 if(plq->front == NULL)로 수정!
+  if(plq->front == NULL) return true;
   else return false;
 }
 
@@ -74,13 +79,17 @@ void deQueue(linkQ* plq)
 {
   if(isEmpty(plq)) {
     printf("Queue Underflow!!!\n");
+    return;
   }
-  node* curr = plq->front;
-  plq->front = plq->front->link;
-  printf("deQueue : %d / ", curr->data);
-  free(curr);
-  printf("메모리 반환 완료\n");
+  else {
+    node* curr = plq->front;
+    plq->front = plq->front->link;
+    printf("deQueue : %d / ", curr->data);
+    free(curr);
+    printf("메모리 반환 완료\n");
+  }
 }
+
 
 void printQ(linkQ* alq)
 {
