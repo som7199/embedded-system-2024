@@ -30,7 +30,71 @@ sd카드 포맷 → sd카드에 라즈베리파이 os(SSH 설정 잊지말고) �
 	- set tabsize 2로 변경
 
 ## 3일차
+- 자기 참조 구조체와 동적할당을 이용한 연결리스트
+```c
+typedef struct NODE {
+  int data;
+  struct NODE *next;
+} node;
+
+typedef struct {
+  node *head;
+} headNode;
+```
+
+```c
+// 후위삽입 - 새 노드를 제일 뒤로!
+void rear_addNode(headNode *pnode, int _data)
+{
+  node* newNode = (node*)malloc(sizeof(node));
+  newNode->data = _data;
+  newNode->next = NULL;
+
+  // 아무런 노드도 생성되지 않은 경우
+  if(pnode->head == NULL)
+  {
+    pnode->head = newNode;
+  }
+  // 이미 생성된 노드들이 있는 경우
+  else
+  {
+    node* curr = pnode->head;
+    // 마지막 노드까지 순회하다가!
+    while(curr->next != NULL){
+      curr = curr->next;
+    }
+    // 마지막 노드에 새로운 노드 연결!!!
+    curr->next = newNode;
+  }
+}
+```
 
 ## 4일차
+- 동적 할당을 받는 경우, 메모리 공간에 할당 받지 못한 경우를 생각해서 조건문 써주기!
+```c
+// 전위삽입 - 새 노드가 제일 앞으로!
+void pre_addNode(headNode* pnode, int _data)
+{
+  node* newNode = (node*)malloc(sizeof(node));
+  // if(newNode == NULL) return -1;
+  if(newNode != NULL) {
+    newNode->data = _data;
+    newNode->next = pnode->head;    // headNode 자체가(headNode 필드의 head가)>
+    pnode->head = newNode;
+  }
+}
+
+```
 
 ## 5일차
+- 새로운 컴파일 방법!
+	- makeT 디렉토리 생성
+	- nano makefile
+	```c
+	test:
+		gcc -o test main.c inputf.c printf.c
+
+	```
+	- make 명령어 치고 나면 gcc -o test main.c inputf.c printf.c 되고 test 실행 파일 만들어짐
+	- ./test 하면 실행됨!
+	- 큰 프로젝트는 makefile에다가 컴파일 형태의 관계를 작성해주고 진행한대..!
