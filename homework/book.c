@@ -1,14 +1,20 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+#define SIZE 100
 
 typedef struct BOOK {
   char id[20];
-  char title[100];
-  char author[100];
+  char title[SIZE];
+  char author[SIZE];
+  char publisher[SIZE];
   int* price;
+  char borrow;
   struct BOOK* next;
 } book;
+
 
 typedef struct {
   book* head;
@@ -17,10 +23,11 @@ typedef struct {
 void showMenu();
 int selectMenu();
 headNode* createHead();
-void addBook();
-void searchBook();
+void addBook(headNode*);
+void searchBook(headNode*);
 void deleteBook();
-void printBook();
+void printBook(headNode*);
+
 
 void main()
 {
@@ -32,15 +39,17 @@ void main()
     int select = selectMenu();
 
     if(select == 1) {
-      printf("\n도서 등록을 시작합니다.\n");
+      printf("\n****** 도서 등록 ******\n");
       addBook(h);
     }
-    else if(select == 2) printf("도서 검색\n");
-      //searchBook();
+    else if(select == 2) {
+      printf("\n****** 도서 검색 ******\n");
+      searchBook(h);
+    }
     else if(select == 3) printf("도서 삭제\n");
       //deleteBook();
     else if(select == 4) {
-      printf("\n도서 출력을 시작합니다.\n");
+      printf("\n****** 현재 도서 목록 ******\n");
       printBook(h);
     }
     else if(select == 0)
@@ -89,10 +98,13 @@ void addBook(headNode *pnode)
   scanf("%s", newBook->title);
   printf("Book's author : ");
   scanf("%s", newBook->author);
+  printf("Book's publisher : ");
+  scanf("%s", newBook->publisher);
   printf("Book's price : ");
   scanf("%d",&(newBook->price));
   printf("\n");
 
+  newBook->borrow = 'y';
   newBook->next = NULL;
 
   book* curr = pnode->head;
@@ -109,12 +121,27 @@ void addBook(headNode *pnode)
   }
 }
 
-/*
-void searchBook()
+// 검색한 도서 => 대여 여부 묻기(단, 대여 가능한 상태의 책인지 확인)
+void searchBook(headNode* pnode)
 {
+  char data[SIZE];
+  printf("검색하고 싶은 도서명 : ");
+  scanf("%s", data);
 
+  int a = 0;
+  // 책을 찾자!
+  book* curr = pnode->head;
+  while(curr != NULL) {
+    if(strcmp(curr->title, data) == 0) {
+      printf("<%s>이 있습니다.\n\n", curr->title);
+      a++;
+    }
+    curr = curr->next;
+  }
+  if (a == 0) printf("찾으시는 책이 없습니다.\n\n");
 }
 
+/*
 void deleteBook()   // 메모리 해제도 같이 해주기
 {
 
@@ -129,6 +156,7 @@ void printBook(headNode* pnode)
     printf("Book's ID : %s\n", curr->id);
     printf("Book's title : %s\n", curr->title);
     printf("author : %s\n", curr->author);
+    printf("publisher : %s\n", curr->publisher);
     printf("price : %d\n\n", curr->price);
     curr = curr->next;
   }
