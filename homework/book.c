@@ -124,7 +124,8 @@ void deleteBook()   // 메모리 해제도 같이 해주기
 void printBook(headNode* pnode)
 {
   book* curr = pnode->head;
-  while(curr != NULL) {
+  //while(curr->next != NULL) {     // 제일 마지막 노드는 curr->next가 NULL이라서 출력이 안됨!
+  while(curr != NULL) {             // curr(노드를 가리키니까)을 통해 curr의 값들을 출력하기!
     printf("Book's ID : %s\n", curr->id);
     printf("Book's title : %s\n", curr->title);
     printf("author : %s\n", curr->author);
@@ -132,3 +133,4 @@ void printBook(headNode* pnode)
     curr = curr->next;
   }
 }
+
