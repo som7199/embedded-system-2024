@@ -28,7 +28,6 @@ void searchBook(headNode*);
 void deleteBook();
 void printBook(headNode*);
 
-
 void main()
 {
   headNode* h = createHead();
@@ -58,7 +57,7 @@ void main()
       break;
     }
     else
-      printf("다시 입력해주세요");
+      printf("0 - 4 사이의 정수를 다시 입력해주세요\n");
   }
 }
 
@@ -77,6 +76,7 @@ int selectMenu()
   int select;
   printf("선택 > ");
   scanf("%d", &select);
+  while(getchar() != '\n');   // 버퍼를 비우는 역할! 문자열 입력 시 무한루프에 빠지는 거 방지용!
   return select;
 }
 
