@@ -132,8 +132,9 @@ void searchBook(headNode* pnode)
   book* curr = pnode->head;
   while(curr != NULL) {
     if(strcmp(curr->title, data) == 0) {
-      printf("<%s>이 있습니다.\n\n", curr->title);
+      printf("<%s>이(가) 있습니다.\n\n", curr->title);
       a++;
+      // 대여 여부 묻기!
     }
     curr = curr->next;
   }
