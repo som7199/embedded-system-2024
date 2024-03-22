@@ -129,7 +129,6 @@ void searchBook(headNode* pnode)
   scanf("%s", data);
 
   int a = 0;
-  // 책을 찾자!
   book* curr = pnode->head;
   while(curr != NULL) {
     if(strcmp(curr->title, data) == 0) {
