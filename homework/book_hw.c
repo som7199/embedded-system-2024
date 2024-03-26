@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 #define SIZE 100
-#define _CRT_SECURE_NO_WARNINGS
 
 static int id;
 typedef struct BOOK {
@@ -78,6 +77,7 @@ void main()
             }
         }
         else if (select == 3) {
+            printf("\n****** 도서 삭제 ******\n");
             if (h->head == NULL) {
                 printf("현재 도서가 없습니다.\n");
             }
@@ -89,9 +89,13 @@ void main()
         }
         else if (select == 4) {
             printf("\n****** 도서 목록 ******\n");
+            if (h->head == NULL) {
+                printf("현재 도서가 없습니다.\n");
+            }
             printBook(h);
         }
         else if (select == 5) {
+            printf("\n****** 도서 반납 ******\n");
             returnBook(h);
         }
         else if (select == 0)
