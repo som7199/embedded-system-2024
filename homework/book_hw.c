@@ -209,26 +209,32 @@ void returnBook(headNode* pnode)
 }
 
 void deleteBook(headNode* pnode, book* pbook)
-{   
+{
+    int search = 0;
     book* curr = pnode->head;
     book* curr_prev = NULL;
 
-    // 도서가 한 권밖에 없는 경우
-    if (curr->next == NULL) {
+    while (curr != NULL) {
         if (strcmp(curr->title, pbook->title) == 0) {
-            pnode->head = NULL;
-            free(curr);
-        }
-        printf("삭제가 불가합니다.\n");
-    }
-    while (curr!= NULL) {
-        if (strcmp(curr->title, pbook->title) == 0) {
-            curr_prev = curr->next;
-            free(curr);
-            printf("해당 도서를 삭제하였습니다.\n");
+            search = 1;
+            break;
         }
         curr_prev = curr;
         curr = curr->next;
+    }
+
+    if (search == 1) {
+        if (curr->borrow == 'y') {
+            if (curr == pnode->head) {
+                pnode->head = NULL;
+            }
+            else {
+                curr_prev = curr->next;
+            }
+            free(curr);
+            printf("해당 도서를 삭제하였습니다.\n");
+        }
+        else printf("해당 도서는 대출중입니다. 삭제가 불가합니다.\n");
     }
 }
 
