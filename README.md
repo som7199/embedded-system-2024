@@ -112,6 +112,3 @@ void pre_addNode(headNode* pnode, int _data)
 	gcc som.c -o test // som.c라는 파일을 컴파일해서 test라는 실행파일을 만들기
 	./test			// 현재 디렉터리의 test라는 이름의 파일을 실행시키기
 	```
-	
-## 7일차
-- 과제 진행 중...
